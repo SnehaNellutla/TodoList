@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TextBox from "devextreme-react/text-box";
 import { Button } from "devextreme-react/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form, { GroupItem, Item } from "devextreme-react/form";
 
 const View = styled.div`
@@ -31,8 +31,29 @@ function Reg() {
   const [emid, setEmid] = useState("");
 
   function submit() {
-    console.log(eid);
-    console.log(ename);
+    // console.log(eid);
+    // console.log(ename);
+    const prob = new Promise((rs, rj) => {
+      const a = "true";
+      if (a == "true") {
+        rs(localStorage.setItem("eid", eid));
+        rs(localStorage.setItem("ename", ename));
+        rs(localStorage.setItem("mbnum", mbnum));
+        rs(localStorage.setItem("addr", addr));
+        rs(localStorage.setItem("emid", emid));
+      } else {
+        rj("could not set value");
+      }
+    });
+    prob.then(() => {
+      const eiid = localStorage.getItem("eid");
+      const enname = localStorage.getItem("ename");
+      const mbnum = localStorage.getItem("mbnum");
+      const addr = localStorage.getItem("addr");
+      const emid = localStorage.getItem("emid");
+      console.log(eiid);
+      console.log(enname);
+    });
   }
 
   return (
